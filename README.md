@@ -1,8 +1,10 @@
 # medjay
 
-The project uses [Midje](https://github.com/marick/Midje/).
+The open financial corporation
 
 ## How to run the tests
+
+The project uses [Midje](https://github.com/marick/Midje/).
 
 `lein midje` will run all tests.
 

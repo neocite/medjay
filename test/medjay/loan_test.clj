@@ -2,16 +2,18 @@
   (:use midje.sweet)
   (:use [medjay.loan]))
 
-(facts "sucesso no pedido de empréstimo"
+(facts "Pedido de empréstimo com sucesso"
        (fact "quero tomar um empréstimo"
-             (pickUp "66677788899" 1000) => "empréstimo liberado com sucesso.")
-       (fact "quero saber se o valor que necessito está disponível para eu pegar emprestado"
+             (pickUp "66677788899" 1000 22) => "empréstimo liberado com sucesso.")
+       (fact "quero saber se o valor que necessito está disponível"
              (availableInCash 1000) => true)
        (fact "quero saber se o meu nome não está negativado"
              (InDebt "66677788899") => false))
 
-(facts "problemas na solicitação de empréstimo"
+(facts "Pedido de empréstimo sem sucesso"
        (fact "quero tentar tomar um empréstimo num valor acima do permitido"
-             (pickUp "66677788899" 1001) => "não liberamos o empréstimo desejado.")
+             (pickUp "66677788899" 1001 22) => "não liberamos o empréstimo desejado.")
        (fact "quero tentar tomar um empréstimo com um CPF negativado"
-             (pickUp "12312312344" 1000) => "não liberamos o empréstimo desejado."))
+             (pickUp "12312312344" 1000 22) => "não liberamos o empréstimo desejado."))
+      (fact "quero tentar tomar sendo menor de idade"
+             (pickUp "66677788899" 1000 17) => "não liberamos o empréstimo desejado.")
